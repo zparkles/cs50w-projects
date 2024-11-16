@@ -1,12 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Search</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+        <link rel="stylesheet" href="style.css" >  
     </head>
     <body>
-        <form action="https://www.google.com/search">
-            <input type="text" name="q">
-            <input type="submit" value="Google Search">
-        </form>
+        <div class="container mt-sm-3 text-end">
+            <a href="image_search.html" class= "top-link me-3">Images</a>
+            <a href="advanced_search.html" class= "top-link">Advanced Search</a>
+        </div>
+        <div class = "container mt-center text-center">
+            <img src = "googlelogo_color_272x92dp.png" style = "align-self: center;">
+            <br>
+            <br>
+            <form action="https://www.google.com/search" >
+                <input class = "search-form" type="text" name="q">
+                <br>
+                <input type="submit" class="btn btn-light btn-gray" value="Google Search"></input>
+                <input class="btn btn-light btn-gray" value="I'm Feeling Lucky" aria-label="I'm Feeling Lucky" name="btnI" type="submit"></input>
+            </form>
+            </div>
     </body>
 </html>
