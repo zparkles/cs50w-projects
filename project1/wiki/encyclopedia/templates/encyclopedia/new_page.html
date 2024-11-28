@@ -1,0 +1,26 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block body %}
+
+{% for message in messages %}
+<div class="alert alert-danger" role="alert" style="width:90%">
+    {{message}} 
+</div>
+{% endfor %}
+
+<h1>New Entry</h1>
+<form action="{% url 'new' %}" method="post">
+    {% csrf_token %}
+    <label for="title">Title:</label>
+    {{form.title}}
+    <p>Content</p>
+    {{form.content}}
+    <br>
+    <input type="submit" class = "btn btn-primary">
+</form>
+
+{% endblock %}
+
+
+
+

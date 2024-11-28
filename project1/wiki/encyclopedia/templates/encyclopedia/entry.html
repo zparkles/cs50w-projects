@@ -1,0 +1,7 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block body %}
+
+{{converted |safe}}
+<a href="/wiki/{{title}}/edit" class="btn btn-primary btn-sm" role="button" aria-pressed="true">Edit Post</a>
+{% endblock %}
