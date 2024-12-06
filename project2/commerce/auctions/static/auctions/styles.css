@@ -1,0 +1,38 @@
+body {
+    padding: 10px;
+    font-family: 'Poppins' !important;
+}
+
+.card {
+    height: 450px !important;
+}
+
+.desc {
+    font-size:0.75rem !important;
+}
+
+.username {
+    position: absolute;
+    align-self: flex-end;
+    bottom: 5px;
+    
+}
+
+.category {
+    background-color: lightblue;
+    color: black;
+    border: 1px solid lightblue;
+    border-radius: 4px;
+    text-align: center;
+    width: 50px;
+    right: 15px;
+}
+
+.form-group {
+    margin-bottom: 20px!important;
+}
+
+.comment-container {
+    padding-top: 50px!important;
+    padding-bottom: 20px!important;
+}

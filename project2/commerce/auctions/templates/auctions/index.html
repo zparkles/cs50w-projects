@@ -1,0 +1,31 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+<br>
+    <h2 style="text-align: center;">Active Listings</h2>
+    <div class="row">
+    {% for l in listings %}
+        {% if l.status == True %}
+        <div class="col-sm-2">
+            <div class="card">
+                <img class="card-img-top" src="{{ l.image.url }}" alt="Card image cap" style="height: 230px; width: 100%; object-fit: cover;">
+                <div class="card-body">
+                <a href="{% url 'listing' l.id %}" class="card-title">{{ l.title }}</a>
+                <p class="card-text">Rp{{l.starting_bid}}</p>
+                <p class="card-text desc">{{l.description}}</p>
+                <div class="row">
+                    <div class="col">
+                        <p class="card-text username"><small class="text-muted">{{l.author.username}}</small></p>
+                    </div>
+                    <div class="col">
+                        <p class="card-text username category"><small>{{l.category}}</small></p>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+
+{% endblock %}

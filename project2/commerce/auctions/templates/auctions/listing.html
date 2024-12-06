@@ -1,0 +1,40 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+<br>
+{% if message %}
+        <div>{{ message }}</div>
+{% endif %}
+
+    <h2 style="text-align: center;">{{listing.title}}</h2>
+    <img src="{{listing.image.url}}" alt="listing image" style="width:50%">
+    <h5>{{listing.author.username}}</h5>
+    {% if top_bid.bid >= listing.starting_bid %}
+        <p>Current Bid: {{top_bid.bid}}</p>
+    {% else %}
+        <p>Starting Bid: {{listing.starting_bid}}</p>
+    {% endif %}
+    <p>{{listing.description}}</p>
+
+    <form action="{% url 'listing' listing.id %}" method="post" >
+        {% csrf_token %}
+        <div class="form-group">
+            <input class="form-control" type="number" name="bid" placeholder="Your Bid">
+            
+        </div>
+            <input class="btn btn-primary" type="submit" value="Make bid">
+        <div class="comment-container">
+            <h5>Comments</h5>
+            {% for c in comments %}
+                <strong>{{ c.account.username}}</strong>
+                {{ c.comment }}
+            {% endfor %}
+         </div>
+        <div class="form-group">
+            <input class="form-control" type="text" name="comment" placeholder="Add a comment">
+        </div>
+        <input class="btn btn-primary" type="submit" value="Comment">
+    </form>
+    
+
+{% endblock %}
