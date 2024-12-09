@@ -8,7 +8,11 @@
         {% if l.status == True %}
         <div class="col-sm-2">
             <div class="card">
+                {% if l.image %}
                 <img class="card-img-top" src="{{ l.image.url }}" alt="Card image cap" style="height: 230px; width: 100%; object-fit: cover;">
+                {% else %}
+                <img class="card-img-top" src="auctions/images/no-image.jpg" alt="Card image cap" style="height: 230px; width: 100%; object-fit: cover;">
+                {% endif %}
                 <div class="card-body">
                 <a href="{% url 'listing' l.id %}" class="card-title">{{ l.title }}</a>
                 <p class="card-text price">Current price: Rp{{l.current_bid }}</p>

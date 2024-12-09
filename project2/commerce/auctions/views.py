@@ -76,7 +76,10 @@ def create (request):
        title = request.POST["title"]
        description = request.POST["description"]
        current_bid = request.POST["current_bid"]
-       image = request.FILES['image']
+       try:
+        image = request.FILES['image']
+       except:
+        image = None
        category = request.POST["category"]
        author = request.user
        
