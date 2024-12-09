@@ -7,14 +7,23 @@ body {
     height: 450px !important;
 }
 
+.watchlist-card {
+    height: 370px !important;
+}
+
 .desc {
     font-size:0.75rem !important;
+}
+
+.price {
+    font-size:0.85rem !important;
 }
 
 .username {
     position: absolute;
     align-self: flex-end;
     bottom: 5px;
+    left: 6px;
     
 }
 
@@ -24,8 +33,32 @@ body {
     border: 1px solid lightblue;
     border-radius: 4px;
     text-align: center;
-    width: 50px;
-    right: 15px;
+    width: 80px;
+    right: 10px;
+    position: absolute;
+    align-self: flex-end;
+    bottom: 5px;
+    font-size: 0.75rem;
+    
+}
+
+.centered {
+    position: fixed; 
+    top: 50%;
+    left: 35%;
+  }
+
+.cat-centered {
+    position: fixed; 
+    top: 50%;
+    left: 38%;
+  }
+.trash {
+    right: 10px;
+    position: absolute;
+    align-self: flex-end;
+    bottom: 5px;
+    
 }
 
 .form-group {
@@ -35,4 +68,19 @@ body {
 .comment-container {
     padding-top: 50px!important;
     padding-bottom: 20px!important;
+}
+
+
+.image-rounded {
+    border-radius: 10px!important; 
+    width: 80%;
+    height: 350px; 
+    object-fit: cover;
+}
+
+.form-side {
+    display: flex;            
+    justify-content: flex-start; 
+    align-items: center;      
+    gap: 10px;                
 }

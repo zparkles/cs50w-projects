@@ -1,0 +1,33 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+<br>
+
+    <h2 style="text-align: center;">Your watchlist</h2>
+    <div class="row">
+    {% for w in watchlist %}
+    {% if w.item.status == True %}
+        <div class="col-sm-2">
+            <div class="card watchlist-card">
+                <img class="card-img-top" src="{{ w.item.image.url }}" alt="Card image cap" style="height: 230px; width: 100%; object-fit: cover;">
+                <div class="card-body">
+                <a href="{% url 'listing' w.item.id %}" class="card-title">{{ w.item.title }}</a>
+                <p class="card-text">Rp{{ w.item.current_bid }}</p>
+                <div class="row">
+                    <div class="col">
+                        <p class="card-text username"><small class="text-muted">{{w.item.author.username}}</small></p>
+                    </div>
+                    <div class="col">
+                        <a href="{% url 'delete watchlist' w.item.id %}" class="card-text trash"><i class="fa-solid fa-trash"></i></a>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+        {% endif %}
+        {% empty %}
+        <h5 class = "centered">You have nothing in your watchlist yet! <a href="{% url 'index' %}">Add items.</a> </h5>
+      {% endfor %}
+    </div>
+
+{% endblock %}
