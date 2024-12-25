@@ -1,0 +1,141 @@
+{% extends "network/layout.html" %}
+{% load static %}
+
+{% block body %}
+
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-5 mt-5">
+            <h1 class="profile" style="text-align: right;" data-id = {{author.id}}>{{author.username}}</h1>
+        </div>
+        <div class="col-2 mt-5">
+            <table class="table table-sm">
+                <thead>
+                  <tr>
+                    <th scope="col">Following</th>
+                    <th scope="col">Followers</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>{{following_count}}</td>
+                    <td>{{follower_count}}</td>
+                  </tr>
+                </tbody>
+              </table>
+              {% if user.is_authenticated and author.username != user.username %}              
+                <div id="follow-btn">
+                </div>
+              {% endif %}
+        </div>
+    </div>
+    {% if user.is_authenticated and author.username == user.username %}
+        <div id="new-post-view">
+        <form action="{% url 'index' %}" method="post">
+            {% csrf_token %}
+            <h5>New post</h5>
+            <div class="form-group">
+                <textarea class="form-control" name="post" rows="3" cols="4" placeholder="Say something"></textarea>
+            </div>
+            <input class="btn btn-primary" type="submit" value="Post">
+        </form>
+        </div>
+
+    {% endif %}
+
+    <br><br>
+    <div class="row">
+    {% for p in page_obj %}
+            <div class="card">
+                <div id="post-view">
+                    <h4>{{p.author.username}}</h4>
+                    <p class="date">{{p.date_posted}}</p>
+                    {% if p.author.username == user.username %}
+                        <a href="#" id="content-edit">Edit</a>
+                    {% endif %}
+                    <p>{{p.post}}</p>
+                    {% if user.is_authenticated %}
+                    <div style="display:inline-flex">
+                        <div id="like-btn-div-{{p.id}}">
+                        </div>
+                        <p id="count-{{p.id}}" class="ms-2"></p>
+                        </div>
+                    {% else %}
+                    <div style="display:inline-flex">
+                        <button class="btn like-btn disabled" id="like"><i class="fa-regular fa-heart"></i></button> 
+                        <p id="count" class="ms-2"></p>
+                        </div>
+                    {% endif %}
+                    <p style="color:grey">Comment</p>
+                </div>
+
+                        <form id ="edit-view">
+                            {% csrf_token %}
+                            <h5>Edit post</h5>
+                            <div class="form-group edit" data-id="{{p.id}}">
+                                <textarea class="form-control" rows="3" cols="4" id="text-edit"></textarea>
+                            </div>
+                            <input class="btn btn-primary" type="submit" value="Save">
+                        </form>
+
+
+            </div>
+        
+    </div>
+{% empty %}
+<h4 style="text-align: center";>No posts yet</h4>
+
+    {% endfor %}
+
+
+
+    <br>
+    <hr>
+       <nav aria-label="Page navigation">
+           <ul class="pagination">
+               {% if page_obj.has_previous %}
+             <li class="page-item">
+               <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
+                 <span aria-hidden="true">&laquo;</span>
+   
+               </a>
+             </li>
+             {% else %}
+             <li class="page-item disabled">
+               <span class="page-link" aria-hidden="true">&laquo;</span>
+             </li>
+             {% endif %}
+             {% for i in page_obj.paginator.page_range %}
+               {% if page_obj.number == i %}
+             <li class="page-item active" aria-current="page">
+               <a class="page-link" href="#">{{i}}</a>
+               </li>
+               {% else %}
+               <li class="page-item" aria-current="page">
+                   <a class="page-link" href="#?page={{i}}">{{i}}</a>
+               {% endif %}
+               {% endfor %}
+   
+               {% if page_obj.has_next %}
+               <li class="page-item">
+               <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next">
+                 <span aria-hidden="true">&raquo;</span>
+               </a>
+             </li>
+             {% else %}
+             <li class="page-item disabled">
+               <span class="page-link" aria-hidden="true">&raquo;</span>
+           </li>
+           {% endif %}
+           </ul>
+         </nav>
+   
+   </div>    
+</div>
+{% endblock %}
+
+{% block script %}
+<script src="{% static 'network/script.js' %}"></script>
+{% endblock %}

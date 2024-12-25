@@ -1,0 +1,27 @@
+.date {
+    color: gray !important;
+    font-size: 15px;
+}
+
+.card {
+    padding-top: 8px !important;
+    box-shadow: 1px 1px 0px 0px lightgray;
+    margin-top: 8px;
+    width: 100%
+}
+
+.like-btn {
+    border: none !important;
+    padding: 0px 0px !important;
+    padding-inline: 0px !important;
+    display: flex !important;
+}
+
+#like {
+    padding: 0 !important;
+}
+
+.table {border: none !important;
+text-align: center !important;
+line-height: 65%;} 
+.table tr, .table td, .table th {border: 0!important;}
