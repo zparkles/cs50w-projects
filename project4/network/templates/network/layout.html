@@ -34,7 +34,7 @@
                                     <strong>{{ user.username }}</strong>
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end">
-                               
+                                    <li><a class="dropdown-item" href="{% url 'profile' user.id %}">Profile</a></li>
                                 <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
                                 </ul>
                             </li> 

@@ -1,19 +1,16 @@
 document.addEventListener('DOMContentLoaded', function() {
 
     const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
-    document.querySelector('#edit-view').style.display = 'none';
+    document.querySelectorAll('.edit-view').forEach(el => el.style.display = 'none');
 
     let flag = true
 
     
     window.addEventListener('load', ()=> {
-        console.log("page loaded")
         fetch('/allposts')
         .then(response => { 
-            console.log("Fetch response received")
             return response.json()})
         .then(posts => {
-            console.log(posts)
       Object.keys(posts).forEach(key => {
         
         const post_id = posts[key].id
@@ -57,7 +54,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     button.innerHTML = `<i class="fa-solid fa-heart" style="color: #ff0505;"></i>`
                     console.log(document.querySelector(`#like-btn-div-${post_id}`));
                     document.querySelector(`#like-btn-div-${post_id}`).append(button)
-                    console.log('if condition met')
                     button.addEventListener('click', () => {
                         unlikeFunction(likes[key].id)
                         location.reload();
@@ -70,7 +66,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     button.innerHTML = `<i class="fa-regular fa-heart"></i>`
                     console.log(document.querySelector(`#like-btn-div-${post_id}`));
                     document.querySelector(`#like-btn-div-${post_id}`).append(button)
-                    console.log('else if condition met')
                     button.addEventListener('click', () => {
                         returnLikeFunction(likes[key].id)
                         location.reload();
@@ -85,7 +80,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 button.innerHTML = `<i class="fa-regular fa-heart"></i>`
                 console.log(document.querySelector(`#like-btn-div-${post_id}`));
                 document.querySelector(`#like-btn-div-${post_id}`).append(button)
-                console.log('else condition met')
                 button.addEventListener('click', () => {
                     likeFunction(post_id)
                     location.reload();
@@ -139,7 +133,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     document.querySelector('#follow-btn').innerHTML = ''
                     document.querySelector('#follow-btn').append(button)
                     
-                    console.log('this else if condition is met')
                     
                     button.addEventListener('click', () => {
                     refollow(foll[key].id)
@@ -160,7 +153,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     document.querySelector('#follow-btn').append(button)
                     const element = document.querySelector('.profile')
                     const user_id = element.getAttribute("data-id")
-                    console.log('this else condition is met')
                     
                     button.addEventListener('click', () => {
                     follow(user_id)
@@ -178,44 +170,50 @@ document.addEventListener('DOMContentLoaded', function() {
     })
 
 
-
-
-document.querySelector('#content-edit').addEventListener('click', ()=>{
-    document.querySelector('#edit-view').style.display = 'block';
-    document.querySelector('.post-view').style.display = 'none';
-    const element = document.querySelector('.edit')
-    if (element){
-    const post_id = element.getAttribute("data-id")
-    edit_post(post_id)
-    }
-})
-
-function edit_post (post_id) {
-    fetch(`/${post_id}/edit`)
-    .then(response => response.json())
-    .then(p => {
-   console.log(p)
-   document.querySelector('#text-edit').value = p.post
-})
-  
-  document.querySelector('#edit-view').onsubmit = function (event) {
-    event.preventDefault()
-    fetch(`/${post_id}/edit`,
-        {method: "PUT",
-        headers: {'X-CSRFToken': csrftoken},
-          body: JSON.stringify({
-            post: document.querySelector("#text-edit").value} )}
-      )
-      .then(() => {
-        window.location.reload();
-        document.querySelector('#edit-view').style.display = 'none';
-        document.querySelector('#post-view').style.display = 'block';
-    }); 
-    
-
-    }    
-
+document.querySelector('#new-post').onsubmit = function () {
+    document.querySelector('.edit-view').style.display = 'none';
 }
+
+document.querySelectorAll('.content-edit').forEach(a => {
+
+    a.addEventListener('click', (event)=>{
+        const postElement = event.target.closest('.card')
+        postElement.querySelector('.edit-view').style.display = 'block';
+        postElement.querySelector('.post-view').style.display = 'none';
+        const element = postElement.querySelector('.edit')
+
+        if (element){
+        const post_id = element.getAttribute("data-id")
+
+        fetch(`/${post_id}/edit`)
+            .then(response => response.json())
+            .then(p => {
+        console.log(p)
+        document.querySelector(`#text-edit-${post_id}`).value = p.post
+        })
+        const editViewElement = postElement.querySelector('.edit-view');
+        console.log('Edit view element:', editViewElement);
+            if (editViewElement){
+                editViewElement.onsubmit = function (event) {
+                    event.preventDefault()
+                    fetch(`/${post_id}/edit`,
+                        {method: "PUT",
+                        headers: {'X-CSRFToken': csrftoken},
+                          body: JSON.stringify({
+                            post: document.querySelector(`#text-edit-${post_id}`).value} )}
+                      )
+                      .then(() => {
+                        window.location.reload();
+                        document.querySelector('.edit-view').style.display = 'none';
+                        
+                    }); 
+            }
+            
+        
+        }
+}})
+
+})
 
 function follow (user_id){
     fetch('follow', {

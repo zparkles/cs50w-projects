@@ -10,7 +10,7 @@
 <div class="container">
     {% if user.is_authenticated %}
         <div id="new-post-view">
-        <form action="{% url 'index' %}" method="post">
+        <form id = "new-post" action="{% url 'index' %}" method="post">
             {% csrf_token %}
             <h5 class="mt-2">New post</h5>
             <div class="form-group">
@@ -30,33 +30,31 @@
                     <a href="{% url 'profile' p.id %}" style="font-size: 20px; color:black"><strong>{{p.author.username}}</strong></a>
                     <p class="date">{{p.date_posted}}</p>
                     {% if p.author.username == user.username %}
-                        <a href="#" id="content-edit">Edit</a>
+                        <a href="#" class="content-edit">Edit</a>
                     {% endif %}
                     <p>{{p.post}}</p>
-                    {% if user.is_authenticated %}
+                    
                     <div style="display:inline-flex">
+                        {% if user.is_authenticated %}
                         <div id="like-btn-div-{{p.id}}">
                         </div>
-                        <p id="count-{{p.id}}" class="ms-2"></p>
-                        </div>
-
-                    {% else %}
-                    <div style="display:inline-flex">
+                        {% else %}
                         <button class="btn like-btn disabled" id="like"><i class="fa-regular fa-heart"></i></button> 
-                            <p id="count-{{p.id}}" class="ms-2"></p>
-        
-                        </div>
-                    {% endif %}
+                        {% endif %}
+                        <p id="count-{{p.id}}" class="ms-2"></p>
+                     </div>
+
+
                     <p style="color:grey">Comment</p>
                 </div>
                 {% csrf_token %}
-                <form id ="edit-view">
+                <form class ="edit-view">
 
                 {% if p.author.username == user.username %}
                         
                             <h5>Edit post</h5>
                             <div class="form-group edit" data-id="{{p.id}}">
-                                <textarea class="form-control" rows="3" cols="4" id="text-edit"></textarea>
+                                <textarea class="form-control" rows="3" cols="4" id="text-edit-{{p.id}}"></textarea>
                             </div>
                             <input class="btn btn-primary" type="submit" value="Save">
                         

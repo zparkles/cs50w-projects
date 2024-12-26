@@ -12,7 +12,7 @@ from .models import User, Post, Like, Follow
 
 def index(request):
     posts = Post.objects.order_by("-date_posted").all()
-    paginator = Paginator(posts,2)
+    paginator = Paginator(posts,10)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     if request.method == "POST":
@@ -69,7 +69,7 @@ def following_page(request):
         post = Post.objects.get(author = i.account.id)
         following_post.append(post)
         following_post.sort(key=lambda post: post.date_posted, reverse=True)
-    paginator = Paginator(following_post, 2)
+    paginator = Paginator(following_post, 10)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     return render(request,'network/following_page.html', {

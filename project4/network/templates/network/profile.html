@@ -56,22 +56,23 @@
                         <a href="#" id="content-edit">Edit</a>
                     {% endif %}
                     <p>{{p.post}}</p>
-                    {% if user.is_authenticated %}
+                    
                     <div style="display:inline-flex">
+                        {% if user.is_authenticated %}
                         <div id="like-btn-div-{{p.id}}">
                         </div>
+                        {% else %}
+                        <button class="btn like-btn disabled" id="like"><i class="fa-regular fa-heart"></i></button> 
+                        {% endif %}
                         <p id="count-{{p.id}}" class="ms-2"></p>
                         </div>
-                    {% else %}
-                    <div style="display:inline-flex">
-                        <button class="btn like-btn disabled" id="like"><i class="fa-regular fa-heart"></i></button> 
-                        <p id="count" class="ms-2"></p>
-                        </div>
-                    {% endif %}
+
+                    
+                    
                     <p style="color:grey">Comment</p>
                 </div>
 
-                        <form id ="edit-view">
+                        <form class ="edit-view">
                             {% csrf_token %}
                             <h5>Edit post</h5>
                             <div class="form-group edit" data-id="{{p.id}}">
@@ -83,12 +84,12 @@
 
             </div>
         
-    </div>
+    
 {% empty %}
 <h4 style="text-align: center";>No posts yet</h4>
 
     {% endfor %}
-
+</div>
 
 
     <br>
