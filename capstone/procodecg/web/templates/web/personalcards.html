@@ -1,0 +1,135 @@
+{% extends "web/layout.html" %}
+{% load static %}
+{% block body %}
+
+<div class="container">
+    <h3>{{account.username}}'s Progress Cards</h3>
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="status-tag-large todo">
+                <i class="fa-solid fa-circle" style="color: #fde091; font-size:20px"></i>
+                 TO DO
+            </div>
+            {% for c in cards %}
+                    {% for u in c.students.all %}
+                        {% if u.username == account.username and c.status == "todo" %}
+                        <div class="card card-personal" style="width: 80%;" data-id = {{c.id}}>
+                            <div class="card-body">
+                              <h5 class="card-title">{{c.task_name}}</h5>
+                            </div>
+                          </div>
+                        {% endif %}
+                    {% endfor %}
+                  {% endfor %}
+        </div>
+        <div class="col-sm-4">
+            <div class="status-tag-large">
+                <i class="fa-solid fa-circle" style="color: #fd9591; font-size: 20px"></i>
+                ON GOING
+            </div>
+            {% for c in cards %}
+                    {% for u in c.students.all %}
+                        {% if u.username == account.username and c.status == "ongoing" %}
+                        <div class="card card-personal" style="width: 80%;" data-id = {{c.id}}>
+                            <div class="card-body">
+                              <h5 class="card-title">{{c.task_name}}</h5>
+                            </div>
+                          </div>
+                        {% endif %}
+                    {% endfor %}
+                  {% endfor %}
+        </div>
+        <div class="col-sm-4">
+            <div class="status-tag-large">
+                <i class="fa-solid fa-circle" style="color: #8df8ac; font-size:20px"></i>
+                COMPLETED
+            </div>
+            {% for c in cards %}
+                    {% for u in c.students.all %}
+                        {% if u.username == account.username and c.status == "completed" %}
+                        <div class="card card-personal" style="width: 80%;" data-id = {{c.id}}>
+                            <div class="card-body">
+                              <h5 class="card-title">{{c.task_name}}</h5>
+                            </div>
+                          </div>
+                        {% endif %}
+                    {% endfor %}
+                  {% endfor %}
+        </div>
+
+    </div>
+</div>
+
+
+<!-- Card Modal -->
+<div class="modal viewPopUp">
+    <div class="modal-dialog" >
+    <!-- Modal content -->
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title view-task"></h5>
+            <div class="edit-task">
+            <i class="fa-regular fa-pen-to-square"></i>
+            </div>
+
+            <span class="close close-2">&times;</span>
+            
+          </div>
+          <div class="modal-body view-task">
+          </div>
+          <!-- CHECKLIST  
+          <div class="card-footers">
+            <button type="button" class="btn btn-light checklist-btn"><i class="fa-solid fa-list-check"></i> Add Checklist</button>
+          </div>-->
+
+          {% if user.username == account.username or user.username == 'zparkles' %}
+
+           <div class="checklist-container">
+            <strong>Checklist</strong>
+            <br>
+            <ul class="taskList"></ul>
+            <input type="text" class = "taskInput" placeholder = "Add a new checklist"/>
+            <button class="btn btn-sm btn-primary add-list"> Add</button>
+            
+           </div>
+          <div class="modal-body view-edit">
+            <form class = "form-edit" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="form-group task">
+                   Task Name
+                <input class="form-control edit-title">
+                </div>
+                <div class="form-group task">
+                    Description <textarea class="form-control edit-description"></textarea>
+                </div>
+                <div class="form-group task">
+                    Students <input class="form-control edit-students">
+                </div>
+                <div class="form-group task">
+                    <label for="status">Tag:</label>
+                    <select class="status" name="status">
+                    <option class = "status-fill" value="" disabled selected>Select a tag</option>
+                    <option value="todo">To Do</option>
+                    <option value="ongoing">On Going</option>
+                    <option value="completed">Completed</option>
+                    </select>
+                </div>
+                <input type="submit" style="margin-top: 5px" class="btn btn-primary" value="Edit"/>
+            </form>
+          </div>
+          {% else %}
+           {% endif %}
+    </div>
+
+    </div>
+    </div>
+
+
+
+
+
+{% endblock %}
+
+{% block script %}
+<script src="{% static 'web/personal.js' %}"></script>
+{% endblock %}

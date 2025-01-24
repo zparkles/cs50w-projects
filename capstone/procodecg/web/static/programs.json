@@ -1,0 +1,112 @@
+[ {"topics" : [{
+        "title": "Algorithm & Data Structure",
+        "topic_desc": "Learn the fundamentals of programming. Structuring a programmer mindset with some introduction to Procedural Programming vs Object Oriented Programming, Design Pattern, etc.)"
+    },
+    {
+        "title": "Game Programming",
+        "topic_desc": "Learn how to develop games using simple programming languages"
+    },
+    {
+        "title": "Web Programming",
+        "topic_desc": "Learn how to develop web for different purposes"
+    },
+    {
+        "title": "Application Programming",
+        "topic_desc": "Learn how to design and develop applications on different platforms (iOS, Android, Blackberry, Windows)"
+    },
+    {
+        "title": "Crypto Programming",
+        "topic_desc": "Learn how to make codes for cryptography, to secure apps, software and computers"
+    },
+    {
+        "title": "Basic Hardware Programming",
+        "topic_desc": "Learn to program hardware using Assembly or C/C++"
+    }
+    ]},
+    
+    {
+    "id": "1",
+    "name" : "Kids Regular Coding Class",
+    "description": "ProCodeCG Kids Programming Class is a regular event every Saturday 9 - 12.",
+    "registration_fee": "Rp50.000,-",
+    "price_per_session": [{
+        "session": "1 session (90 minutes)",
+        "session_price":[{
+            "2_participants": "Rp200.000",
+            "3_participants": "Rp180.000",
+            "4_participants": "Rp160.000",
+            "more_participants": "Rp150.000"
+
+        }]},
+        {
+           "session": "2 sessions (180 minutes)",
+            "session_price":[{
+            "2_participants": "Rp325.000",
+            "3_participants": "Rp305.000",
+            "4_participants": "Rp285.000",
+            "more_participants": "Rp275.000" 
+        }]
+    
+        }],
+    "registration_link": "https://tinyurl.com/procodecgkidsregcodingclass"
+
+
+
+},
+
+{   "id": "2",
+    "name" : "Kids Weekday Coding Class",
+    "description": "ProCodeCG Kids Programming Class is held every Tuesday 16:00 - 17:30, Wednesday 16:30 - 18:00, Thursday & Friday 16:00 - 17:30.",
+    "registration_fee": "Rp50.000,-",
+    "price": [{
+            "2_participants": "Rp200.000",
+            "3_participants": "Rp180.000",
+            "4_participants": "Rp160.000",
+            "more_participants": "Rp150.000"
+        }],
+    "registration_link": "https://tinyurl.com/procodecgkidsregcodingclass"
+
+},
+{   "id": "3",
+    "name" : "Kids Coding Camp",
+    "description": "ProCodeCG usually holds Kids Coding Camp event twice a year during school holiday. Each topic takes 3 - 5 days.",
+    "single_price": "Rp950.000 - Rp2.000.000"
+
+},
+{   "id": "4",
+    "name" : "Online Private Class",
+    "description": "ProCodeCG provides private classes with customized curriculum and more flexible schedules.",
+    "single_price": "Rp500.000 per hour"
+
+},
+
+{   "id": "5",
+    "name" : "Tutoring Coding Class",
+    "description": "ProCodeCG provides online tutoring class for high school and college students to help with their assignments, exams, competitions, etc. Each tutoring session is 90 minutes.",
+    "tutor_price": [{
+            "2_participants": "Rp250.000",
+            "3_participants": "Rp230.000",
+            "4_participants": "Rp210.000",
+            "5_participants": "Rp190.000",
+            "6_participants": "Rp170.000"
+        }],
+    "registration_link": "https://tinyurl.com/procodecgtutoringclass"
+
+},
+
+
+{   "id": "6",
+    "name" : "Crash Course & Customized Training",
+    "description": "ProCodeCG provides customized curriculum and training. This program is usually for companies or adults.",
+    "single_price": "Rp1.000.000"
+
+},
+{   "id": "7",
+    "name" : "Coding Mom",
+    "description": "Training Moms to be front-end developers. The topics included are GitHub, HTML, CSS, JavaScript, Bootstrap, PHP, MySQL."
+
+}
+
+
+
+]

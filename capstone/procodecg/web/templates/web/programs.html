@@ -1,0 +1,118 @@
+{% extends "web/layout.html" %}
+
+{% block body %}
+
+<h1 class="large-text">PROGRAMS</h1>
+<h5 class="program-text">All classes are online</h5>
+    {% for p in data %}
+        {% if p.topics %}
+        {% else %}
+        <div class="programs" id = {{p.id}}>
+            <h2> {{p.name}}</h2>
+            <p>{{p.description}}</p>
+            {% if p.price_per_session %}
+            <p><strong>Registration fee: </strong> {{p.registration_fee}}</p>
+            <h5>Price</h5>
+                {% for s in p.price_per_session %}
+                <p><strong>{{s.session}}</strong></p>
+                <table class="table table-hover table-responsive-sm">
+                    <thead>
+                      <tr>
+                        <th scope="col">Two participants</th>
+                        <th scope="col">Three participants</th>
+                        <th scope="col">Four participants</th>
+                        <th scope="col">Five or more participants</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>{{s.session_price.0.2_participants}}</td>
+                        <td>{{s.session_price.0.3_participants}}</td>
+                        <td>{{s.session_price.0.4_participants}}</td>
+                        <td>{{s.session_price.0.more_participants}}</td>
+                      </tr>
+                    </tbody>
+                </table>
+                {% endfor %}
+            <a class = "btn btn-light btn-register" href="{{p.registration_link}}">Register Here!</a>
+            {% elif p.single_price %}
+            <h5>Price</h5>
+                {{p.single_price}}
+
+            {% elif p.price %}
+            <p><strong>Registration fee: </strong> {{p.registration_fee}}</p>
+            <h5>Price per session</h5>
+            <table class="table table-hover table-responsive-sm">
+                <thead>
+                  <tr>
+                    <th scope="col">Two participants</th>
+                    <th scope="col">Three participants</th>
+                    <th scope="col">Four participants</th>
+                    <th scope="col">Five or more participants</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>{{p.price.0.2_participants}}</td>
+                    <td>{{p.price.0.3_participants}}</td>
+                    <td>{{p.price.0.4_participants}}</td>
+                    <td>{{p.price.0.more_participants}}</td>
+                  </tr>
+                </tbody>
+            </table>
+            <a class = "btn btn-primary btn-register" href="{{p.registration_link}}">Register Here!</a>
+            {% elif p.tutor_price %}
+            <h5>Price per session</h5>
+            <table class="table table-hover table-responsive-sm">
+                <thead>
+                  <tr>
+                    <th scope="col">Two participants</th>
+                    <th scope="col">Three participants</th>
+                    <th scope="col">Four participants</th>
+                    <th scope="col">Five participants</th>
+                    <th scope="col">Six participants</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>{{p.tutor_price.0.2_participants}}</td>
+                    <td>{{p.tutor_price.0.3_participants}}</td>
+                    <td>{{p.tutor_price.0.4_participants}}</td>
+                    <td>{{p.tutor_price.0.5_participants}}</td>
+                    <td>{{p.tutor_price.0.6_participants}}</td>
+                  </tr>
+                </tbody>
+            </table>
+            <a class = "btn btn-light btn-register" href="{{p.registration_link}}">Register Here!</a>
+            
+            {% else %}
+
+            {% endif %}
+        </div>
+        {% endif %}
+
+    {% endfor %}
+
+    {% for p in data %}
+        {% if p.topics %}
+        <div class="programs" id = "topics">
+            <h2>TOPICS</h2>
+            <ol>
+                {% for t in p.topics %}
+            <li style="font-size: 17px"><h5> {{t.title}}</h5>
+            <p>{{t.topic_desc}}</p></li>
+            {% endfor %}
+            </ol>
+        </div>
+        {% endif %}
+
+    {% endfor %}
+
+
+
+{% endblock %}
+
+{% block footer %}
+
+{% include "web/footer.html" %}
+{% endblock %}

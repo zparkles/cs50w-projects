@@ -1,0 +1,183 @@
+{% extends "web/layout.html" %}
+{% load static %}
+{% block body %}
+
+
+
+<div class="container">
+    <h3>Students' Progress Cards</h3>
+    {% if user.username == 'zparkles' %}
+    <a class="btn btn-light" id="card-btn">+ Add Task</a>
+    {% else %}
+    {% endif %}
+    <div class="row">
+        {% for s in students %}
+        <div class="col-sm-3 student-card">
+            <div class="card" style="width: 18rem;">
+                <div class="card-header">
+                    {{s.username}}'s Card
+                </div>
+                <div class="progress-card">
+                  {% for c in card_obj %}
+                    {% for u in c.students.all %}
+                        {% if u.username == s.username %}
+                        <div class="card card-sm" style="width: 16rem;" data-id = {{c.id}}>
+                            <div class="card-body">
+                              <h6 class="card-title">{{c.task_name}}</h6>
+                              <div class="status-tag">
+                                {% if c.status == "todo" %}
+                                <i class="fa-solid fa-circle" style="color: #fde091; font-size:8px"></i>
+                                 To Do
+                                {% elif c.status == "ongoing" %}
+                                <i class="fa-solid fa-circle" style="color: #fd9591; font-size:8px"></i>
+                                On Going
+                                {% elif c.status == "completed" %}
+                                <i class="fa-solid fa-circle" style="color: #8df8ac; font-size:8px"></i>
+                                Completed
+                                {% endif %}
+                              </div>
+                            </div>
+                          </div>
+                        {% endif %}
+                    {% endfor %}
+                  {% endfor %}
+                </div>
+                <a class = "btn btn-primary more-btn" href="{% url 'personalCards' s.id %}">See More</a>
+             
+              </div>
+        </div>
+        
+        
+<!-- TASK Modal -->
+<div id="createPopUp" class="modal">
+    <div class="modal-dialog" >
+    <!-- Modal content -->
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title">New Task</h5>
+            <span class="close">&times;</span>
+            
+          </div>
+          <div class="modal-body">
+            <form id="create-card"  enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="form-group task">
+                   Task Name
+                <input class="form-control" id = "task-title">
+                </div>
+                <div class="form-group task">
+                    Description <textarea id="task-description" class="form-control"></textarea>
+                </div>
+                <div class="form-group task">
+                    Students <input class="form-control" id="students">
+                </div>
+                <div class="form-group task">
+                    Attachments
+                    <input type="file" class="form-control" id="attachment-1">
+                </div>
+                <div class="form-group task">
+                    <input type="file" class="form-control" id="attachment-2">
+                </div>
+                <div class="form-group task">
+                    <label for="status">Tag:</label>
+                    <select id="status" name="status">
+                    <option value="" disabled selected>Select a tag</option>
+                    <option value="todo">To Do</option>
+                    <option value="ongoing">On Going</option>
+                    <option value="completed">Completed</option>
+                    </select>
+                </div>
+    
+                <input type="submit" style="margin-top: 5px" class="btn btn-primary" value="Create"/>
+            </form>
+          </div>
+    </div>
+
+    </div>
+    </div>
+
+<!-- Card Modal -->
+<div class="modal viewPopUp">
+    <div class="modal-dialog" >
+    <!-- Modal content -->
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title view-task"></h5>
+            {% if user.username == s.username or user.username == 'zparkles' %}
+            <div class="edit-task">
+                <i class="fa-regular fa-pen-to-square"></i>
+            </div>
+            {% else %}
+           {% endif %}
+            <span class="close close-2">&times;</span>
+            
+          </div>
+          <div class="modal-body view-task">
+            
+          </div>
+          <!-- CHECKLIST-->
+
+          {% if user.username == s.username or user.username == 'zparkles' %}
+
+          <div class="checklist-container">
+            <strong>Checklist</strong>
+            <br>
+            <ul class="taskList"></ul>
+            <input type="text" class = "taskInput" placeholder = "Add a new checklist"/>
+            <button class="btn btn-sm btn-primary add-list"> Add</button>
+            
+           </div>
+
+           
+          <div class="modal-body view-edit">
+            <form class = "form-edit" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="form-group task">
+                   Task Name
+                <input class="form-control edit-title">
+                </div>
+                <div class="form-group task">
+                    Description <textarea class="form-control edit-description"></textarea>
+                </div>
+                <div class="form-group task">
+                    Students <input class="form-control edit-students">
+                </div>
+                <div class="form-group task">
+                    <label for="status">Tag:</label>
+                    <select class="status" name="status">
+                    <option class = "status-fill" value="" disabled selected>Select a tag</option>
+                    <option value="todo">To Do</option>
+                    <option value="ongoing">On Going</option>
+                    <option value="completed">Completed</option>
+                    </select>
+                </div>
+                <input type="submit" style="margin-top: 5px" class="btn btn-primary" value="Edit"/>
+            </form>
+          </div>
+          {% else %}
+           {% endif %}
+    </div>
+
+    </div>
+    </div>
+
+    
+    {% endfor %}
+</div>
+
+
+{% endblock %}
+
+{% block footer %}
+
+{% include "web/footer.html" %}
+{% endblock %}
+
+{% block script %}
+{% if user.username == 'zparkles' %}
+<script src="{% static 'web/progress-admin.js' %}"></script>
+{% else %}
+<script src="{% static 'web/progress.js' %}"></script>
+{% endif %}
+
+{% endblock %}

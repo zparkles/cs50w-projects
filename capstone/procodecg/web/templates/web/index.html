@@ -1,0 +1,105 @@
+{% extends "web/layout.html" %}
+{% load static %}
+
+{% block body %}
+
+<section class = "home">
+    <div class="slider">
+    <img class="home-image active" src="static/web/media/coding class.png"/>
+    <img class="home-image" src="static/web/media/coding weekday.png"/>
+    <img class="home-image" src="static/web/media/coding mum.jpg"/>
+    <img class="home-image" src="static/web/media/coding private.png"/>
+    <img class="home-image" src="static/web/media/training.jpg"/>
+    <img class="home-image" src="static/web/media/coding camp.jpg"/>
+    <img class="home-image" src="static/web/media/tutoring.png"/>
+    </div>
+    <div class="content">
+        <h1>PROCODE<span class="hero-title">CG</span>'S</h1>
+         <h5 class="desc">Kids Regular Coding Class</h5>
+        <div class="read-btn">
+            <a class="btn btn-primary" href="{% url 'programs' %}">Learn More</a>
+        </div>
+    </div>
+
+    <div class="slider-navigation">
+        <div id = "btn-1" class="nav-btn active"></div>
+        <div id = "btn-2" class="nav-btn"></div>
+        <div id = "btn-3" class="nav-btn"></div>
+        <div id = "btn-4" class="nav-btn"></div>
+        <div id = "btn-5" class="nav-btn"></div>
+        <div id = "btn-6" class="nav-btn"></div>
+        <div id = "btn-7" class="nav-btn"></div>
+    </div>
+</section>
+
+<div class="container about">
+    <h1 class="large-text">WHY CODING FOR KIDS?</h1>
+    <p class="about-text">Coding/programming develops a structured way of thinking, thus <strong>improving logical thinking</strong>. 
+        Coding subliminally will teach kids to follow rules and being consistent while also being <strong>critical and creative</strong> as well.
+      </p>
+      <div class="hashtag"><i class="fa-solid fa-hashtag"></i></div>
+
+
+</div>
+
+<div class="blue">
+<div class="container about">
+    <h1 class="large-text-2">ABOUT PROCODECG <i class="fa-solid fa-laptop" style="color: #ffffff;"></i></h1>
+    <p class="about-text-2"><strong>ProCodeCG</strong> is a startup based in Bandung that concerns in technology especially in programming and coding literacy. 
+        We love to help <strong>children build and develop</strong> their skills in IT environment, because we realize that children are the most precious investment when it comes to the needs of human resources. 
+        We are helping the <strong>future industries</strong> by shaping the skills of children to meet the tech industries landscape requirements as early as possible, because of the rapid changes in technology around the world.
+      </p>
+
+</div>
+</div>
+
+<div class="container about">
+    <h1 class="large-text">LEARN MORE</h1>
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="card" style="width: 20rem; height:220px">
+                <div class="card-body">
+                <h3 class="card-title"><i class="fa-regular fa-calendar"></i></h3>
+                  <h5 class="card-title">Calendar</h5>
+                  <p class="card-text">Find out more about ProCodeCG's schedule and upcoming events!</p>
+                  <br>
+                  <a href="{% url 'calendar' %}" class="card-link">Go to Calendar</a>
+                </div>
+              </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="card" style="width: 20rem;  height:220px">
+                <div class="card-body">
+                <h3 class="card-title"><i class="fa-solid fa-code"></i></h3>
+                  <h5 class="card-title">Programs</h5
+                  <p class="card-text">Find out more about ProCodeCG's programs and choose the right one for you or your children!</p>
+                  <a href="{% url 'programs' %}" class="card-link">Go to Programs</a>
+                </div>
+              </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="card" style="width: 20rem;  height:220px">
+                <div class="card-body">
+                <h3 class="card-title"><i class="fa-solid fa-code"></i></h3>
+                  <h5 class="card-title">Topics</h5
+                  <p class="card-text">Find out more what topics are offered by ProCodeCG!</p>
+                  <br>
+                  <a href="programs#topics" class="card-link">Go to Topics</a>
+                </div>
+              </div>
+        </div>
+        </div>
+
+</div>
+
+
+{% endblock %}
+
+{% block footer %}
+
+{% include "web/footer.html" %}
+{% endblock %}
+
+{% block script %}
+<script src="{% static 'web/index.js' %}"></script>
+{% endblock %}
